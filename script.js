@@ -825,6 +825,7 @@ attachDataActionListeners(document);
 function applyRoleNavBar(navbarId) {
     const navbar = document.getElementById(navbarId);
     if (!navbar) return;
+
     if (getMyRole() === 'emily') {
         navbar.innerHTML = `
             <i class="nav-icon ti ti-history" data-action="activity"></i>
@@ -832,6 +833,19 @@ function applyRoleNavBar(navbarId) {
         `;
         navbar.style.justifyContent = 'center';
         navbar.style.gap = '40px';
-        attachDataActionListeners(navbar);
+    } else {
+        navbar.innerHTML = `
+            <i class="nav-icon ti ti-home" data-action="home"></i>
+            <i class="nav-icon ti ti-clipboard-list" data-action="edit-meals"></i>
+            <div class="nav-spacer"></div>
+            <i class="nav-icon ti ti-history" data-action="activity"></i>
+            <i class="nav-icon ti ti-settings" data-action="settings"></i>
+            <div class="nav-button" data-action="attendance">
+                <i class="ti ti-bell"></i>
+            </div>
+        `;
+        navbar.style.justifyContent = 'space-around';
+        navbar.style.gap = '20px';
     }
+    attachDataActionListeners(navbar);
 }
