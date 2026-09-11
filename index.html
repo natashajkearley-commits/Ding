@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ding</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.46.0/tabler-icons.min.css">
+</head>
+<body>
+
+
+<div class="screen" id="screen-role-select">
+    <div class="card-container">
+        <div class="status-card">
+            <p class="eyebrow">Welcome to Ding</p>
+            <h1>Who's using this phone?</h1>
+        </div>
+        <button class="btn-primary full-width" id="role-mum-btn">I'm Mum</button>
+        <div style="height: 12px;"></div>
+        <button class="btn-secondary full-width" id="role-emily-btn">I'm Emily</button>
+    </div>
+</div>
+
+
+
+
+<div class="screen" id="screen-emily-waiting">
+    <div class="card-container">
+        <div class="status-card">
+            <p class="eyebrow" id="emily-waiting-eyebrow">Nothing from Mum yet</p>
+            <h1 id="emily-waiting-heading">You'll see it here once she starts tonight's dinner check</h1>
+        </div>
+        <div id="nudge-section">
+        <button class="btn-secondary full-width" id="nudge-btn">Nudge Mum</button>
+        <p id="nudge-confirm" style="text-align: center; font-size: 12px; color: var(--text-secondary); margin-top: 10px; min-height: 14px;"></p>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="screen" id="screen-emily-resolved">
+    <div class="card-container">
+        <div class="status-card">
+            <p class="eyebrow">Tonight's dinner</p>
+            <h1 id="emily-resolved-heading">All set</h1>
+        </div>
+        <p id="emily-resolved-detail" style="text-align: center; color: var(--text-secondary); font-size: 14px;"></p>
+    </div>
+</div>
+
+
+
+    <div class="screen" id="screen-invite">
+     <div class="invite-card">
+        <div class="icon-badge"><i class="ti ti-tools-kitchen-2"></i></div>
+        <p class="eyebrow">Tonight's dinner</p>
+        <h1>Will you be joining me for dinner?</h1>
+
+        <div class="time-note">
+            <span id="invite-time-text">Mum's planning for tonight</span>
+        </div>
+
+        <div class="button-row">
+            <button class="btn-primary" id="invite-yes-btn">Yes, I'm in</button>
+            <button class="btn-secondary" id="invite-no-btn">Sorting myself out</button>
+        </div>
+
+        <p class="status-line">Waiting for a response...</p>
+      </div>
+    </div>
+
+
+
+
+
+<div class="screen" id="screen-home">
+     <div class="home-container">
+
+    <div id="nudge-banner" style="display: none; background: var(--accent); color: #7A3E1D; text-align: center; padding: 10px; border-radius: 12px; margin-bottom: 1rem; font-size: 13px; font-weight: 500;">
+    Emily's asking about dinner tonight!
+    </div>
+
+        
+    <div class="checkpoint-row">
+    <div class="checkpoint" id="checkpoint-1">
+        <div class="checkpoint-circle">1</div>
+    </div>
+    <div class="checkpoint" id="checkpoint-2">
+        <div class="checkpoint-circle">2</div>
+    </div>
+    <div class="checkpoint" id="checkpoint-3">
+        <div class="checkpoint-circle">3</div>
+    </div>
+</div>
+
+<div class="big-status-tag" id="big-status-tag">Loading...</div>
+
+<button class="btn-primary action-btn" id="home-action-btn" style="display: none;"></button>
+
+       
+
+<div class="nav-bar">
+    <i class="nav-icon ti ti-home" data-action="home"></i>
+    <i class="nav-icon ti ti-clipboard-list" data-action="edit-meals"></i>
+    <div class="nav-spacer"></div>
+    <i class="nav-icon ti ti-history" data-action="activity"></i>
+    <i class="nav-icon ti ti-settings" data-action="settings"></i>
+    <div class="nav-button" data-action="attendance">
+        <i class="ti ti-bell"></i>
+    </div>
+</div>
+
+ </div>
+ </div>
+
+
+
+
+<div class="screen" id="screen-attendance">
+    <div class="back-arrow" id="back-to-home">←</div>
+    <div class="card-container">
+
+        <div class="status-card">
+            <p class="eyebrow">Check attendance</p>
+            <h1>Will you be joining me for dinner tonight?</h1>
+        </div>
+
+        <div class="field-group">
+            <p class="field-label">Dinner time (optional)</p>
+            <input type="time" id="time-input" class="time-input">
+        </div>
+
+        <button class="btn-primary full-width" id="send-invite-btn">Send invite</button>
+
+    </div>
+
+    <div class="nav-bar">
+    <i class="nav-icon ti ti-home" data-action="home"></i>
+    <i class="nav-icon ti ti-clipboard-list" data-action="edit-meals"></i>
+    <div class="nav-spacer"></div>
+    <i class="nav-icon ti ti-history" data-action="activity"></i>
+    <i class="nav-icon ti ti-settings" data-action="settings"></i>
+    <div class="nav-button" data-action="attendance">
+        <i class="ti ti-bell"></i>
+    </div>
+</div>
+
+</div>
+
+
+
+<div class="screen" id="screen-meal-controls">
+    <div class="back-arrow" id="back-to-home-2">←</div>
+    <div class="card-container">
+
+        <div class="status-card">
+            <p class="eyebrow">What's for dinner?</p>
+            <h1>Choose how to plan tonight</h1>
+        </div>
+
+        <button class="option-card" id="option-one-meal">
+            <p class="option-title">I know what I'm making</p>
+            <p class="option-subtitle">Send one meal to confirm</p>
+        </button>
+
+        <button class="option-card" id="option-three-meals">
+            <p class="option-title">Give a few options</p>
+            <p class="option-subtitle">Send 3 meals to choose from</p>
+        </button>
+
+        <button class="option-card" id="option-ask">
+            <p class="option-title">Ask what they want</p>
+            <p class="option-subtitle">Let them suggest a preference</p>
+        </button>
+
+    </div>
+
+    <div class="nav-bar">
+    <i class="nav-icon ti ti-home" data-action="home"></i>
+    <i class="nav-icon ti ti-clipboard-list" data-action="edit-meals"></i>
+    <div class="nav-spacer"></div>
+    <i class="nav-icon ti ti-history" data-action="activity"></i>
+    <i class="nav-icon ti ti-settings" data-action="settings"></i>
+    <div class="nav-button" data-action="attendance">
+        <i class="ti ti-bell"></i>
+    </div>
+    </div>
+
+</div>
+
+
+
+
+<div class="screen" id="screen-meal-list">
+    <div class="back-arrow" id="back-to-meal-controls">←</div>
+    <div class="card-container">
+
+        <div class="status-card">
+            <p class="eyebrow" id="meal-list-eyebrow">Pick a meal</p>
+            <h1 id="meal-list-heading">Choose from the list</h1>
+        </div>
+
+        <div id="meal-options-list"></div>
+
+        <button class="btn-primary full-width" id="send-meal-btn">Send</button>
+
+    </div>
+</div>
+
+
+
+
+<div class="screen" id="screen-meal-check">
+    <div class="card-container">
+        <div class="invite-card">
+            <div class="icon-badge"><i class="ti ti-tools-kitchen-2"></i></div>
+            <p class="eyebrow">Here's what's cooking</p>
+            <h1 id="meal-check-name">Meal</h1>
+
+            <div class="button-row">
+                <button class="btn-primary" id="meal-yes-btn">Yes please</button>
+                <button class="btn-secondary" id="meal-no-btn">Not tonight</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="screen" id="screen-reason">
+    <div class="card-container">
+        <div class="status-card">
+            <p class="eyebrow">Why not?</p>
+            <h1>Let mum know</h1>
+        </div>
+        <div class="field-group">
+            <textarea id="reason-input" class="time-input" rows="3" placeholder="Not feeling like it tonight..."></textarea>
+        </div>
+        <button class="btn-primary full-width" id="send-reason-btn">Send</button>
+    </div>
+</div>
+
+
+
+<div class="screen" id="screen-meal-response">
+    <div class="card-container">
+        <div class="status-card">
+            <p class="eyebrow" id="meal-response-eyebrow">Emily said no</p>
+            <h1 id="meal-response-reason">Reason goes here</h1>
+        </div>
+        <button class="btn-primary full-width" id="keep-meal-btn">Keep the meal as is</button>
+        <div style="height: 12px;"></div>
+        <button class="btn-secondary full-width" id="change-meal-btn">Send 3 alternatives</button>
+    </div>
+</div>
+
+
+
+
+<div class="screen" id="screen-optout">
+    <div class="card-container">
+        <div class="status-card">
+            <p class="eyebrow">Mum's keeping <span id="optout-meal-name">the meal</span></p>
+            <h1>What will you do?</h1>
+        </div>
+        <button class="btn-primary full-width" id="optout-sort-btn">Sort myself out</button>
+        <div style="height: 12px;"></div>
+        <button class="btn-secondary full-width" id="optout-eat-btn">Eat it anyway</button>
+    </div>
+</div>
+
+
+
+
+
+<div class="screen" id="screen-pick-something">
+    <div class="card-container">
+        <div class="status-card">
+            <p class="eyebrow">Pick something</p>
+            <h1>What do you want tonight?</h1>
+        </div>
+        <div id="pick-something-list"></div>
+        <button class="btn-secondary full-width" id="none-of-these-btn">None of these</button>
+    </div>
+</div>
+
+
+
+
+
+<div class="screen" id="screen-call-each-other">
+    <div class="card-container">
+        <div class="status-card" style="text-align: center;">
+            <p class="eyebrow">Couldn't agree tonight</p>
+            <h1>Give each other a call</h1>
+        </div>
+        <button class="btn-primary full-width" id="call-done-btn">Sorted it out</button>
+    </div>
+</div>
+
+
+
+
+<div class="screen" id="screen-preference">
+    <div class="card-container">
+        <div class="status-card">
+            <p class="eyebrow">What do you feel like?</p>
+            <h1>Pick something</h1>
+        </div>
+        <div id="preference-list"></div>
+        <button class="btn-secondary full-width" id="no-preference-btn">No preference</button>
+    </div>
+</div>
+
+
+
+
+<div class="screen" id="screen-preference-response">
+    <div class="card-container">
+        <div class="status-card">
+            <p class="eyebrow">Emily's preference</p>
+            <h1 id="preference-response-meal">Meal</h1>
+        </div>
+        <button class="btn-primary full-width" id="accept-preference-btn">Sounds good</button>
+        <div style="height: 12px;"></div>
+        <button class="btn-secondary full-width" id="deny-preference-btn">Suggest something else</button>
+    </div>
+</div>
+
+
+
+<div class="screen" id="screen-edit-meals">
+    <div class="back-arrow" id="back-from-meals">←</div>
+    <div class="card-container">
+        <div class="status-card">
+            <p class="eyebrow">Meal list</p>
+            <h1>Add or remove meals</h1>
+        </div>
+        <div id="edit-meals-list"></div>
+        <div class="field-group">
+            <input type="text" id="new-meal-input" class="time-input" placeholder="Add a new meal...">
+        </div>
+        <button class="btn-primary full-width" id="add-meal-btn">Add meal</button>
+    </div>
+
+    <div class="nav-bar">
+    <i class="nav-icon ti ti-home" data-action="home"></i>
+    <i class="nav-icon ti ti-clipboard-list" data-action="edit-meals"></i>
+    <div class="nav-spacer"></div>
+    <i class="nav-icon ti ti-history" data-action="activity"></i>
+    <i class="nav-icon ti ti-settings" data-action="settings"></i>
+    <div class="nav-button" data-action="attendance">
+        <i class="ti ti-bell"></i>
+    </div>
+    </div>
+</div>
+
+
+
+<div class="screen" id="screen-activity">
+    <div class="back-arrow" id="back-from-activity">←</div>
+    <div class="card-container">
+        <div class="status-card">
+            <p class="eyebrow">Activity</p>
+            <h1>What's happened tonight</h1>
+        </div>
+        <div id="activity-list"></div>
+    </div>
+
+    <div class="nav-bar">
+    <i class="nav-icon ti ti-home" data-action="home"></i>
+    <i class="nav-icon ti ti-clipboard-list" data-action="edit-meals"></i>
+    <div class="nav-spacer"></div>
+    <i class="nav-icon ti ti-history" data-action="activity"></i>
+    <i class="nav-icon ti ti-settings" data-action="settings"></i>
+    <div class="nav-button" data-action="attendance">
+        <i class="ti ti-bell"></i>
+    </div>
+    </div>
+</div>
+
+
+
+<div class="screen" id="screen-settings">
+    <div class="back-arrow" id="back-from-settings">←</div>
+    <div class="card-container">
+        <div class="status-card">
+            <p class="eyebrow">Settings</p>
+            <h1>App settings</h1>
+        </div>
+        <button class="option-card" id="switch-role-btn">
+            <p class="option-title">Switch who you are</p>
+            <p class="option-subtitle">Currently set as <span id="current-role-label">—</span></p>
+        </button>
+    </div>
+
+    <div class="nav-bar">
+    <i class="nav-icon ti ti-home" data-action="home"></i>
+    <i class="nav-icon ti ti-clipboard-list" data-action="edit-meals"></i>
+    <div class="nav-spacer"></div>
+    <i class="nav-icon ti ti-history" data-action="activity"></i>
+    <i class="nav-icon ti ti-settings" data-action="settings"></i>
+    <div class="nav-button" data-action="attendance">
+        <i class="ti ti-bell"></i>
+    </div>
+    </div>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCyCwOyYeB4o1i4KQyRWoVbJBhQUWvjBFE",
+        authDomain: "ding-4f6cc.firebaseapp.com",
+        projectId: "ding-4f6cc",
+        storageBucket: "ding-4f6cc.firebasestorage.app",
+        messagingSenderId: "320738100003",
+        appId: "1:320738100003:web:bb17686e9bb5360a3c8296"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.db = db;
+</script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
