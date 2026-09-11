@@ -36,9 +36,15 @@ if (roleMumBtn) {
 }
 
 if (roleEmilyBtn) {
-    roleEmilyBtn.addEventListener('click', () => {
+    roleEmilyBtn.addEventListener('click', async () => {
         setMyRole('emily');
-        showScreen('screen-invite');
+        const snapshot = await getDoc(responseRef);
+        if (snapshot.exists()) {
+            routeEmily(snapshot.data());
+        } else {
+            showScreen('screen-emily-waiting');
+        }
+        
     });
 }
 
@@ -639,6 +645,7 @@ function updateCheckpoints(data) {
 
 
 function routeEmily(data) {
+    console.log("data.date:", data.date, "| today:", getTodayDateString(), "| stale?", data.date && data.date !== getTodayDateString())
 
     const isStale = data.date && data.date !== getTodayDateString();
     const d = isStale ? {} : data;
@@ -686,7 +693,8 @@ function renderActivityList(data) {
     if (!list) return;
     list.innerHTML = '';
 
-    const events = data.events || [];
+    const isStale = data.date && data.date !== getTodayDateString();
+    const events = isStale ? [] : (data.events || []);
 
     if (events.length === 0) {
         list.innerHTML = '<p style="text-align: center; color: var(--text-secondary); font-size: 13px;">Nothing yet tonight.</p>';
@@ -739,7 +747,19 @@ if (navActivity) {
 }
 
 if (backFromActivity) {
-    backFromActivity.addEventListener('click', () => showScreen('screen-home'));
+    backFromActivity.addEventListener('click', async () => {
+        const role = getMyRole();
+        if (role === 'mum') {
+            showScreen('screen-home');
+        } else {
+            const snapshot = await getDoc(responseRef);
+            if (snapshot.exists()) {
+                routeEmily(snapshot.data());
+            } else {
+                showScreen('screen-emily-waiting');
+            }
+        }
+    });
 }
 
 
@@ -756,7 +776,19 @@ if (navSettings) {
 }
 
 if (backFromSettings) {
-    backFromSettings.addEventListener('click', () => showScreen('screen-home'));
+    backFromSettings.addEventListener('click', async () => {
+        const role = getMyRole();
+        if (role === 'mum') {
+            showScreen('screen-home');
+        } else {
+            const snapshot = await getDoc(responseRef);
+            if (snapshot.exists()) {
+                routeEmily(snapshot.data());
+            } else {
+                showScreen('screen-emily-waiting');
+            }
+        }
+    });
 }
 
 if (switchRoleBtn) {
