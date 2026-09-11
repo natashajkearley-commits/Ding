@@ -799,16 +799,39 @@ if (switchRoleBtn) {
 }
 
 
-document.querySelectorAll('[data-action]').forEach(el => {
-    el.addEventListener('click', () => {
-        const action = el.getAttribute('data-action');
-        if (action === 'home') showScreen('screen-home');
-        if (action === 'attendance') showScreen('screen-attendance');
-        if (action === 'activity') showScreen('screen-activity');
-        if (action === 'edit-meals') showScreen('screen-edit-meals');
-        if (action === 'settings') {
-            currentRoleLabel.textContent = getMyRole() === 'mum' ? 'Mum' : 'Emily';
-            showScreen('screen-settings');
-        }
+function attachDataActionListeners(container) {
+    container.querySelectorAll('[data-action]').forEach(el => {
+        el.addEventListener('click', () => {
+            const action = el.getAttribute('data-action');
+            if (action === 'home') showScreen('screen-home');
+            if (action === 'attendance') showScreen('screen-attendance');
+            if (action === 'activity') {
+                showScreen('screen-activity');
+                applyRoleNavBar('activity-navbar');
+            }
+            if (action === 'edit-meals') showScreen('screen-edit-meals');
+            if (action === 'settings') {
+                currentRoleLabel.textContent = getMyRole() === 'mum' ? 'Mum' : 'Emily';
+                showScreen('screen-settings');
+                applyRoleNavBar('settings-navbar');
+            }
+        });
     });
-});
+}
+
+attachDataActionListeners(document);
+
+
+function applyRoleNavBar(navbarId) {
+    const navbar = document.getElementById(navbarId);
+    if (!navbar) return;
+    if (getMyRole() === 'emily') {
+        navbar.innerHTML = `
+            <i class="nav-icon ti ti-history" data-action="activity"></i>
+            <i class="nav-icon ti ti-settings" data-action="settings"></i>
+        `;
+        navbar.style.justifyContent = 'center';
+        navbar.style.gap = '40px';
+        attachDataActionListeners(navbar);
+    }
+}
