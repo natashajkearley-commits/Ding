@@ -30,6 +30,7 @@ const roleEmilyBtn = document.getElementById('role-emily-btn');
 
 if (roleMumBtn) {
     roleMumBtn.addEventListener('click', () => {
+        console.log("mum button clicked");
         setMyRole('mum');
         showScreen('screen-home');
         setupNotifications();
@@ -38,6 +39,7 @@ if (roleMumBtn) {
 
 if (roleEmilyBtn) {
     roleEmilyBtn.addEventListener('click', async () => {
+        console.log("emily button clicked");
         setMyRole('emily');
         setupNotifications();
         const snapshot = await getDoc(responseRef);
