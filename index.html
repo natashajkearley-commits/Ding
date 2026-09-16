@@ -439,6 +439,8 @@
     <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
     import { getFirestore } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+    import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging.js";
+
 
     const firebaseConfig = {
         apiKey: "AIzaSyCyCwOyYeB4o1i4KQyRWoVbJBhQUWvjBFE",
@@ -451,9 +453,13 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    const messaging = getMessaging(app);
 
     window.db = db;
+    window.messaging = messaging;
+    window.getMessagingToken = getToken;
 </script>
     <script type="module" src="script.js"></script>
+
 </body>
 </html>

@@ -32,12 +32,14 @@ if (roleMumBtn) {
     roleMumBtn.addEventListener('click', () => {
         setMyRole('mum');
         showScreen('screen-home');
+        setupNotifications();
     });
 }
 
 if (roleEmilyBtn) {
     roleEmilyBtn.addEventListener('click', async () => {
         setMyRole('emily');
+        setupNotifications();
         const snapshot = await getDoc(responseRef);
         if (snapshot.exists()) {
             routeEmily(snapshot.data());
@@ -445,7 +447,28 @@ if (backToHome2) {
     backToHome2.addEventListener('click', () => showScreen('screen-home'));
 }
 
+async function setupNotifications() {
+    try {
+        const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+        const permission = await Notification.requestPermission();
 
+        if (permission === 'granted') {
+            const token = await window.getMessagingToken(window.messaging, {
+                vapidKey: 'BObHCpx3oy2Vejith0xVJbHvao-3MbFF5Kx1Tuq9gB-u5Vf0O6IfTIdP9T9hZMb6GWCNB21CCCcITm5P1WXby-o',
+                serviceWorkerRegistration: registration
+            });
+
+            if (token) {
+                const role = getMyRole();
+                await setDoc(responseRef, {
+                    [role === 'mum' ? 'mumToken' : 'emilyToken']: token
+                }, { merge: true });
+            }
+        }
+    } catch (error) {
+        console.log('Notification setup failed:', error);
+    }
+}
 
 onSnapshot(responseRef, (snapshot) => {
     const currentRole = getMyRole();
