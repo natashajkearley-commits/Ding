@@ -454,6 +454,8 @@ async function setupNotifications() {
     try {
         const registration = await navigator.serviceWorker.register('firebase-messaging-sw.js');
         console.log("service worker registered:", registration);
+        await navigator.serviceWorker.ready;
+        console.log("service worker is ready");
         const permission = await Notification.requestPermission();
         console.log("permission result:", permission);
 
