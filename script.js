@@ -449,7 +449,7 @@ if (backToHome2) {
 
 async function setupNotifications() {
     try {
-        const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+        const registration = await navigator.serviceWorker.register('firebase-messaging-sw.js');
         const permission = await Notification.requestPermission();
 
         if (permission === 'granted') {
