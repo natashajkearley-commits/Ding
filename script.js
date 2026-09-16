@@ -453,19 +453,23 @@ async function setupNotifications() {
     console.log("setupNotifications is running");
     try {
         const registration = await navigator.serviceWorker.register('firebase-messaging-sw.js');
+        console.log("service worker registered:", registration);
         const permission = await Notification.requestPermission();
+        console.log("permission result:", permission);
 
         if (permission === 'granted') {
             const token = await window.getMessagingToken(window.messaging, {
                 vapidKey: 'BObHCpx3oy2Vejith0xVJbHvao-3MbFF5Kx1Tuq9gB-u5Vf0O6IfTIdP9T9hZMb6GWCNB21CCCcITm5P1WXby-o',
                 serviceWorkerRegistration: registration
             });
+            console.log("token:", token);
 
             if (token) {
                 const role = getMyRole();
                 await setDoc(responseRef, {
                     [role === 'mum' ? 'mumToken' : 'emilyToken']: token
                 }, { merge: true });
+                console.log("token saved to firestore");
             }
         }
     } catch (error) {
