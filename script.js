@@ -433,7 +433,8 @@ async function sendInvite() {
         mealStuck: false,
         mealKept: false,
         events: []
-    });
+    }, { merge: true });
+
     await logEvent("Invite sent to Emily" + (time ? ` — dinner planned for ${formatTime12Hour(time)}` : ''));
 
     showScreen('screen-home');
