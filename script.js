@@ -436,6 +436,9 @@ async function sendInvite() {
         mealStuck: false,
         mealKept: false,
         sortedByCall: false,
+        askedPreference: false,
+        preferenceSubmitted: false,
+        noPreference: false,
         events: []
     }, { merge: true });
 
