@@ -319,13 +319,14 @@ const denyPreferenceBtn = document.getElementById('deny-preference-btn');
 
 if (acceptPreferenceBtn) {
     acceptPreferenceBtn.addEventListener('click', async () => {
-        await setDoc(responseRef, { mealDecided: true, mealAccepted: true }, { merge: true });
+        await setDoc(responseRef, { mealDecided: true, mealAccepted: true, preferenceSubmitted: false }, { merge: true });
         await logEvent("Meal confirmed for tonight");
     });
 }
 
 if (denyPreferenceBtn) {
-    denyPreferenceBtn.addEventListener('click', () => {
+    denyPreferenceBtn.addEventListener('click', async () => {
+        await setDoc(responseRef, { preferenceSubmitted: false }, { merge: true });
         openMealList(3, "Pick up to 3 options");
     });
 }
