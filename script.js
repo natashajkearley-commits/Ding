@@ -241,7 +241,9 @@ function renderPickSomething(options) {
             await setDoc(responseRef, {
                 mealOptions: [meal],
                 mealDecided: true,
-                mealAccepted: true
+                mealAccepted: true,
+                sortedByCall: false,
+                mealStuck: false
             }, { merge: true });
             await logEvent(`Emily picked ${meal}`);
             
@@ -433,6 +435,7 @@ async function sendInvite() {
         mealReason: null,
         mealStuck: false,
         mealKept: false,
+        sortedByCall: false,
         events: []
     }, { merge: true });
 
