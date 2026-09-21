@@ -1,3 +1,6 @@
+navigator.serviceWorker.getRegistrations().then(registrations => {
+    registrations.forEach(reg => reg.unregister());
+});
 import { doc, setDoc, onSnapshot, getDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 function showScreen(screenId) {
