@@ -662,7 +662,8 @@ function updateCheckpoints(data) {
             actionBtn.style.display = 'block';
             actionBtn.onclick = () => showScreen('screen-preference-response');
         } else if (!data.mealOptions || data.mealOptions.length === 0) {
-            bigTag.textContent = "Deciding what's for dinner";
+            const pickedTimeText = data.pickedTime ? ` — ${formatTime12Hour(data.pickedTime)}` : '';
+            bigTag.textContent = `Deciding what's for dinner${pickedTimeText}`;
             actionBtn.textContent = "Choose a meal";
             actionBtn.style.display = 'block';
             actionBtn.onclick = () => showScreen('screen-meal-controls');
