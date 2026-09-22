@@ -804,7 +804,7 @@ function showEmilyResolved(data) {
         detail.textContent = "You two couldn't agree — a quick call should sort it out.";
     } else if (data.mealDecided === true) {
         const meal = data.mealOptions && data.mealOptions[0] ? data.mealOptions[0] : "dinner";
-        const time = data.pickedTime ? ` at ${formatTime12Hour(data.time)}` : "";
+        const time = data.pickedTime ? ` at ${formatTime12Hour(data.pickedTime)}` : "";
         heading.textContent = meal;
         detail.textContent = `You're all set${time}.`;
     } else {
