@@ -709,7 +709,7 @@ function updateCheckpoints(data) {
             bigTag.textContent = "Sorted out on a call";
         } else if (data.mealDecided === true) {
             const meal = data.mealOptions && data.mealOptions[0] ? data.mealOptions[0] : "Dinner";
-            const time = data.time ? formatTime12Hour(data.time) : null;
+            const time = data.pickedTime ? formatTime12Hour(data.time) : null;
             bigTag.innerHTML = `
                 <div class="tag-meal-name">${meal}</div>
                 <div class="tag-meal-details">${time ? `${time} · ` : ''}Emily's in</div>
@@ -804,7 +804,7 @@ function showEmilyResolved(data) {
         detail.textContent = "You two couldn't agree — a quick call should sort it out.";
     } else if (data.mealDecided === true) {
         const meal = data.mealOptions && data.mealOptions[0] ? data.mealOptions[0] : "dinner";
-        const time = data.time ? ` at ${formatTime12Hour(data.time)}` : "";
+        const time = data.pickedTime ? ` at ${formatTime12Hour(data.time)}` : "";
         heading.textContent = meal;
         detail.textContent = `You're all set${time}.`;
     } else {
