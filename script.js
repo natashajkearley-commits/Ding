@@ -1,14 +1,34 @@
 
 import { doc, setDoc, onSnapshot, getDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
-function showScreen(screenId) {
+let screenHistory = [];
+
+function showScreen(screenId, trackHistory = true) {
+    if (trackHistory) {
+        const currentActive = document.querySelector('.screen.active');
+        if (currentActive && currentActive.id !== screenId) {
+            screenHistory.push(currentActive.id);
+        }
+    }
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.remove('active');
     });
     document.getElementById(screenId).classList.add('active');
 }
 
+function goBack() {
+    const previous = screenHistory.pop();
+    if (previous) {
+        showScreen(previous, false);
+    } else {
+        showScreen('screen-home', false);
+    }
+}
+
 window.showScreen = showScreen;
+window.goBack = goBack;
+
+
 
 const myRole = getMyRole();
 if (!myRole) {
@@ -144,7 +164,7 @@ if (optionOneMeal) optionOneMeal.addEventListener('click', () => openMealList(1,
 if (optionThreeMeals) optionThreeMeals.addEventListener('click', () => openMealList(3, "Pick up to 3 options"));
 
 if (backToMealControls) {
-    backToMealControls.addEventListener('click', () => showScreen('screen-meal-controls'));
+    backToMealControls.addEventListener('click', () => goBack());
 }
 
 if (sendMealBtn) {
@@ -374,7 +394,7 @@ if (addMealBtn) {
 }
 
 if (backFromMeals) {
-    backFromMeals.addEventListener('click', () => showScreen('screen-home'));
+     backFromMeals.addEventListener('click', () => goBack());
 }
 
 
@@ -407,7 +427,7 @@ onSnapshot(mealListRef, (snapshot) => {
 
 const backToHome = document.getElementById('back-to-home');
 if (backToHome) {
-    backToHome.addEventListener('click', () => showScreen('screen-home'));
+     backToHome.addEventListener('click', () => goBack());
 }
 
 async function respondToInvite(response) {
@@ -455,7 +475,7 @@ noButton.addEventListener('click', () => respondToInvite(false));
 
 const backToHome2 = document.getElementById('back-to-home-2');
 if (backToHome2) {
-    backToHome2.addEventListener('click', () => showScreen('screen-home'));
+     backToHome2.addEventListener('click', () => goBack());
 }
 
 async function setupNotifications() {
@@ -498,7 +518,7 @@ onSnapshot(responseRef, (snapshot) => {
 
 
         if (currentRole === 'mum') {
-            showScreen('screen-home');
+            showScreen('screen-home', false);
         } else if (currentRole === 'emily') {
             routeEmily(data);
         }
