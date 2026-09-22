@@ -776,6 +776,13 @@ function renderActivityList(data) {
     const isStale = data.date && data.date !== getTodayDateString();
     const events = isStale ? [] : (data.events || []);
 
+    const teaserSubtitle = document.getElementById('activity-teaser-subtitle');
+    if (teaserSubtitle) {
+        teaserSubtitle.textContent = events.length === 0
+            ? "Nothing yet"
+            : `${events.length} update${events.length > 1 ? 's' : ''}`;
+    }
+
     if (events.length === 0) {
         list.innerHTML = '<p style="text-align: center; color: var(--text-secondary); font-size: 13px;">Nothing yet tonight.</p>';
         return;

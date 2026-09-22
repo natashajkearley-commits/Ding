@@ -29,10 +29,13 @@
 
 <div class="screen" id="screen-emily-waiting">
     <div class="card-container">
-        <div class="status-card">
-            <p class="eyebrow" id="emily-waiting-eyebrow">Nothing from Mum yet</p>
-            <h1 id="emily-waiting-heading">You'll see it here once she starts tonight's dinner check</h1>
-        </div>
+    <div class="waiting-badge">
+       <i class="ti ti-clock" aria-hidden="true"></i>
+    </div>
+    <div class="status-card">
+       <p class="eyebrow" id="emily-waiting-eyebrow">Nothing from Mum yet</p>
+       <h1 id="emily-waiting-heading">You'll see it here once she starts tonight's dinner check</h1>
+    </div>
         <div id="nudge-section">
         <button class="btn-secondary full-width" id="nudge-btn">Nudge Mum</button>
         <p id="nudge-confirm" style="text-align: center; font-size: 12px; color: var(--text-secondary); margin-top: 10px; min-height: 14px;"></p>
@@ -116,6 +119,15 @@
 <div class="big-status-tag" id="big-status-tag">Loading...</div>
 
 <button class="btn-primary action-btn" id="home-action-btn" style="display: none;"></button>
+
+<div class="activity-teaser" data-action="activity">
+    <i class="ti ti-clipboard-list" aria-hidden="true"></i>
+    <div class="activity-teaser-text">
+        <p class="activity-teaser-title">Tonight's activity</p>
+        <p class="activity-teaser-subtitle" id="activity-teaser-subtitle">Nothing yet</p>
+    </div>
+    <i class="ti ti-chevron-right" aria-hidden="true"></i>
+</div>
 
        
 
