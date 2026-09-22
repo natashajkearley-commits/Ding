@@ -709,7 +709,7 @@ function updateCheckpoints(data) {
             bigTag.textContent = "Sorted out on a call";
         } else if (data.mealDecided === true) {
             const meal = data.mealOptions && data.mealOptions[0] ? data.mealOptions[0] : "Dinner";
-            const time = data.pickedTime ? formatTime12Hour(data.time) : null;
+            const time = data.pickedTime ? formatTime12Hour(data.pickedTime) : null;
             bigTag.innerHTML = `
                 <div class="tag-meal-name">${meal}</div>
                 <div class="tag-meal-details">${time ? `${time} · ` : ''}Emily's in</div>
