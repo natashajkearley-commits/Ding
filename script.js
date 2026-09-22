@@ -631,11 +631,19 @@ function updateCheckpoints(data) {
     }
 
     if (activeStage === 2 && (data.mealDecided === true || data.mealStuck === true)) {
-    activeStage = 3;
+        activeStage = 3;
     }
 
     actionBtn.style.display = 'none';
     actionBtn.onclick = null;
+
+    function setTag(eyebrow, title, pillText) {
+        bigTag.innerHTML = `
+            <p class="tag-eyebrow">${eyebrow}</p>
+            <p class="tag-meal-name">${title}</p>
+            ${pillText ? `<div class="tag-pill"><i class="ti ti-check" aria-hidden="true"></i><span>${pillText}</span></div>` : ''}
+        `;
+    }
 
     if (activeStage === 1) {
         checkpoint1.classList.add('active');
@@ -643,12 +651,12 @@ function updateCheckpoints(data) {
         checkpoint3.classList.add('upcoming');
 
         if (!data.inviteSent) {
-            bigTag.textContent = "Not started";
+            setTag('Tonight', 'Not started yet');
             actionBtn.textContent = "Send invite";
             actionBtn.style.display = 'block';
             actionBtn.onclick = () => showScreen('screen-attendance');
         } else {
-            bigTag.textContent = "Waiting for a response";
+            setTag('Tonight', 'Waiting for a response');
         }
     }
 
@@ -658,51 +666,48 @@ function updateCheckpoints(data) {
         checkpoint3.classList.add('upcoming');
 
         if (data.askedPreference && (!data.mealOptions || data.mealOptions.length === 0) && !data.noPreference) {
-            bigTag.textContent = "Waiting for a preference";
+            setTag('Tonight', 'Waiting for a preference');
         } else if (data.noPreference) {
-            bigTag.textContent = "No preference — pick something";
+            setTag('Tonight', 'No preference — pick something');
             actionBtn.textContent = "Choose a meal";
             actionBtn.style.display = 'block';
             actionBtn.onclick = () => openMealList(3, "Pick up to 3 options");
         } else if (data.preferenceSubmitted && !data.mealDecided) {
-            bigTag.textContent = `Emily wants ${data.mealOptions[0]}`;
+            setTag('Tonight', `Emily wants ${data.mealOptions[0]}`);
             actionBtn.textContent = "Respond";
             actionBtn.style.display = 'block';
             actionBtn.onclick = () => showScreen('screen-preference-response');
         } else if (!data.mealOptions || data.mealOptions.length === 0) {
             const pickedTimeText = data.pickedTime ? ` — ${formatTime12Hour(data.pickedTime)}` : '';
-            bigTag.textContent = `Deciding what's for dinner${pickedTimeText}`;
+            setTag('Tonight', `Deciding what's for dinner${pickedTimeText}`);
             actionBtn.textContent = "Choose a meal";
             actionBtn.style.display = 'block';
             actionBtn.onclick = () => showScreen('screen-meal-controls');
-
         } else if (data.mealKept === true && data.mealDecided === false) {
-            bigTag.textContent = "Waiting on Emily's decision";
+            setTag('Tonight', "Waiting on Emily's decision");
         } else if (data.mealAccepted === false) {
-
-            bigTag.textContent = "Needs a new meal";
+            setTag('Tonight', 'Needs a new meal');
             actionBtn.textContent = "Respond to Emily";
             actionBtn.style.display = 'block';
             actionBtn.onclick = () => showScreen('screen-meal-response');
-            
         } else if (data.mealOptions.length === 1) {
-            bigTag.textContent = `Waiting on ${data.mealOptions[0]}`;
+            setTag('Tonight', `Waiting on ${data.mealOptions[0]}`);
         } else {
-            bigTag.textContent = "Waiting on a pick from 3 options";
+            setTag('Tonight', 'Waiting on a pick from 3 options');
         }
     }
 
-        if (activeStage === 3) {
+    if (activeStage === 3) {
         checkpoint1.classList.add('done');
         checkpoint2.classList.add('done');
         checkpoint3.classList.add('active');
 
         if (data.attending === false) {
-            bigTag.textContent = "Sorting themselves out tonight";
+            setTag('Tonight', 'Sorting themselves out tonight');
         } else if (data.mealOptOut === true) {
-            bigTag.textContent = "Emily opted out for dinner tonight";
+            setTag('Tonight', 'Emily opted out for dinner tonight');
         } else if (data.mealStuck === true) {
-            bigTag.textContent = "Couldn't agree — give each other a call";
+            setTag('Tonight', "Couldn't agree — give each other a call");
             actionBtn.textContent = "Sorted it out";
             actionBtn.style.display = 'block';
             actionBtn.onclick = async () => {
@@ -715,16 +720,13 @@ function updateCheckpoints(data) {
                 await logEvent("Sorted out over a call");
             };
         } else if (data.sortedByCall === true) {
-            bigTag.textContent = "Sorted out on a call";
+            setTag('Tonight', 'Sorted out on a call');
         } else if (data.mealDecided === true) {
             const meal = data.mealOptions && data.mealOptions[0] ? data.mealOptions[0] : "Dinner";
             const time = data.pickedTime ? formatTime12Hour(data.pickedTime) : null;
-            bigTag.innerHTML = `
-                <div class="tag-meal-name">${meal}</div>
-                <div class="tag-meal-details">${time ? `${time} · ` : ''}Emily's in</div>
-            `;
+            setTag('Tonight', `${meal}${time ? ` · ${time}` : ''}`, "Emily's in");
         } else {
-            bigTag.textContent = "Not there yet";
+            setTag('Tonight', 'Not there yet');
         }
     }
 }
