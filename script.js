@@ -444,6 +444,7 @@ async function sendInvite() {
 
     await setDoc(responseRef, {
         inviteSent: true,
+        inviteSentAt: new Date().toISOString(),
         date: getTodayDateString(),
         time: time,
         nudgeSent: false,
