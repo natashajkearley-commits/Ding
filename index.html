@@ -29,24 +29,27 @@
 
 <div class="screen" id="screen-emily-waiting">
     <div class="card-container">
-    <div class="waiting-badge">
-       <i class="ti ti-clock" aria-hidden="true"></i>
-    </div>
-    <div class="status-card">
-       <p class="eyebrow" id="emily-waiting-eyebrow">Nothing from Mum yet</p>
-       <h1 id="emily-waiting-heading">You'll see it here once she starts tonight's dinner check</h1>
-    </div>
+        <p class="emily-header-date" id="emily-header-date" style="text-align: center; font-size: 13px; color: var(--text-muted); margin: 0 0 8px;">Today</p>
+        <div class="waiting-badge">
+            <i class="ti ti-clock" aria-hidden="true"></i>
+        </div>
+        <div class="status-card">
+            <p class="eyebrow" id="emily-waiting-eyebrow">Nothing from Mum yet</p>
+            <h1 id="emily-waiting-heading">You'll see it here once she starts tonight's dinner check</h1>
+        </div>
         <div id="nudge-section">
-        <button class="btn-secondary full-width" id="nudge-btn">Nudge Mum</button>
-        <p id="nudge-confirm" style="text-align: center; font-size: 12px; color: var(--text-secondary); margin-top: 10px; min-height: 14px;"></p>
+            <button class="btn-secondary full-width" id="nudge-btn" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i class="ti ti-bell-ringing" aria-hidden="true"></i>
+                Nudge Mum
+            </button>
+            <p id="nudge-confirm" style="text-align: center; font-size: 12px; color: var(--text-secondary); margin-top: 10px; min-height: 14px;"></p>
         </div>
     </div>
 
     <div class="nav-bar" style="justify-content: center; gap: 40px;">
-    <i class="nav-icon ti ti-history" data-action="activity"></i>
-    <i class="nav-icon ti ti-settings" data-action="settings"></i>
+        <i class="nav-icon ti ti-history" data-action="activity"></i>
+        <i class="nav-icon ti ti-settings" data-action="settings"></i>
     </div>
-
 </div>
 
 
@@ -99,6 +102,16 @@
 <div class="screen" id="screen-home">
      <div class="home-container">
 
+    <div class="home-header">
+        <div>
+            <p class="home-header-date" id="home-header-date">Today</p>
+            <p class="home-header-greeting">Hey Mum</p>
+        </div>
+        <div class="home-header-avatar">
+            <i class="ti ti-tools-kitchen-2" aria-hidden="true"></i>
+        </div>
+    </div>
+
     <div id="nudge-banner" style="display: none; background: var(--accent); color: #7A3E1D; text-align: center; padding: 10px; border-radius: 12px; margin-bottom: 1rem; font-size: 13px; font-weight: 500;">
     Emily's asking about dinner tonight!
     </div>
@@ -106,13 +119,15 @@
         
     <div class="checkpoint-row">
     <div class="checkpoint" id="checkpoint-1">
-        <div class="checkpoint-circle">1</div>
+      <div class="checkpoint-circle">1</div>
     </div>
+    <div class="checkpoint-line"></div>
     <div class="checkpoint" id="checkpoint-2">
-        <div class="checkpoint-circle">2</div>
+      <div class="checkpoint-circle">2</div>
     </div>
+    <div class="checkpoint-line"></div>
     <div class="checkpoint" id="checkpoint-3">
-        <div class="checkpoint-circle">3</div>
+      <div class="checkpoint-circle">3</div>
     </div>
 </div>
 

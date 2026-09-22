@@ -106,6 +106,11 @@ async function logEvent(text) {
     await setDoc(responseRef, { events: [...existingEvents, newEvent] }, { merge: true });
 }
 
+function getTodayDisplayDate() {
+    const now = new Date();
+    return now.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long' });
+}
+
 const responseRef = doc(window.db, "responses", "tonight");
 const mealListRef = doc(window.db, "settings", "mealList");
 const yesButton = document.getElementById('invite-yes-btn');
@@ -536,6 +541,9 @@ onSnapshot(responseRef, (snapshot) => {
             routeEmily(data);
         }
 
+        const homeHeaderDate = document.getElementById('home-header-date');
+        if (homeHeaderDate) homeHeaderDate.textContent = getTodayDisplayDate();
+
 
 
 
@@ -726,6 +734,8 @@ function updateCheckpoints(data) {
 
 function routeEmily(data) {
     console.log("data.date:", data.date, "| today:", getTodayDateString(), "| stale?", data.date && data.date !== getTodayDateString())
+    const emilyHeaderDate = document.getElementById('emily-header-date');
+    if (emilyHeaderDate) emilyHeaderDate.textContent = getTodayDisplayDate();
 
     const isStale = data.date && data.date !== getTodayDateString();
     const d = isStale ? {} : data;
