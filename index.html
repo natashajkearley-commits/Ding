@@ -33,8 +33,8 @@
         <div class="waiting-badge">
             <i class="ti ti-clock" aria-hidden="true"></i>
         </div>
-        <div class="status-card">
-            <p class="eyebrow" id="emily-waiting-eyebrow">Nothing from Mum yet</p>
+        <div class="status-card plain-block">
+            <p class="eyebrow eyebrow-strong" id="emily-waiting-eyebrow">Nothing from Mum yet</p>
             <h1 id="emily-waiting-heading">You'll see it here once she starts tonight's dinner check</h1>
         </div>
         <div id="nudge-section">
@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <div class="nav-bar" style="justify-content: center; gap: 40px;">
+    <div class="nav-bar nav-bar-compact">
         <i class="nav-icon ti ti-history" data-action="activity"></i>
         <i class="nav-icon ti ti-settings" data-action="settings"></i>
     </div>
@@ -56,14 +56,14 @@
 
 <div class="screen" id="screen-emily-resolved">
     <div class="card-container">
-        <div class="status-card">
-            <p class="eyebrow">Tonight's dinner</p>
+        <div class="status-card plain-block">
+            <p class="eyebrow eyebrow-strong">Tonight's dinner</p>
             <h1 id="emily-resolved-heading">All set</h1>
         </div>
         <p id="emily-resolved-detail" style="text-align: center; color: var(--text-secondary); font-size: 14px;"></p>
     </div>
 
-    <div class="nav-bar" style="justify-content: center; gap: 40px;">
+    <div class="nav-bar nav-bar-compact">
     <i class="nav-icon ti ti-history" data-action="activity"></i>
     <i class="nav-icon ti ti-settings" data-action="settings"></i>
     </div>
@@ -117,23 +117,27 @@
     </div>
 
         
+    <div class="big-status-tag" id="big-status-tag">Loading...</div>
+
+    <button class="btn-primary action-btn" id="home-action-btn" style="display: none;"></button>
+
     <div class="checkpoint-row">
     <div class="checkpoint" id="checkpoint-1">
-      <div class="checkpoint-circle">1</div>
+       <div class="checkpoint-circle">1</div>
+       <span class="checkpoint-tag">Invite</span>
     </div>
     <div class="checkpoint-line"></div>
     <div class="checkpoint" id="checkpoint-2">
-      <div class="checkpoint-circle">2</div>
+       <div class="checkpoint-circle">2</div>
+       <span class="checkpoint-tag">Meal</span>
     </div>
     <div class="checkpoint-line"></div>
     <div class="checkpoint" id="checkpoint-3">
-      <div class="checkpoint-circle">3</div>
+       <div class="checkpoint-circle">3</div>
+       <span class="checkpoint-tag">Confirmed</span>
     </div>
 </div>
 
-<div class="big-status-tag" id="big-status-tag">Loading...</div>
-
-<button class="btn-primary action-btn" id="home-action-btn" style="display: none;"></button>
 
 <div class="activity-teaser" data-action="activity">
     <i class="ti ti-clipboard-list" aria-hidden="true"></i>

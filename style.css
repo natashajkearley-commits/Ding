@@ -217,16 +217,33 @@ h1 {
     justify-content: space-around;
     gap: 20px;
     background: white;
-    border-radius: 24px 24px 0 0;
+    border-radius: 999px;
     padding: 16px 24px;
-    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
-    margin-top: auto;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    margin: auto auto 20px;
+    width: calc(100% - 40px);
+    max-width: 340px;
 }
+
+.nav-bar-compact {
+    width: calc(100% - 40px);
+    max-width: 340px;
+    background: var(--card);
+    border: none;
+    box-shadow: none;
+    border-radius: 999px;
+    padding: 18px 24px;
+}
+
 
 .nav-icon {
     font-size: 30px;
     font-style: normal;
     color: var(--primary);
+}
+
+.nav-bar-compact .nav-icon {
+    padding: 10px;
 }
 
 .nav-button {
@@ -238,23 +255,18 @@ h1 {
     height: 64px;
     border-radius: 50%;
     background: var(--primary);
-    box-shadow: 0 6px 14px rgba(201, 111, 68, 0.35);
+    color: white;
+    box-shadow: 0 0 0 6px white, 0 6px 14px rgba(201, 111, 68, 0.35);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 26px;
+    z-index: 2;
 }
 
-.nav-button::before {
-    content: "";
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
-    border-radius: 50%;
-    background: white;
-    z-index: -1;
+.nav-button i {
+    color: white;
+    font-size: 26px;
 }
 
 .nav-spacer {
@@ -453,6 +465,17 @@ h1 {
     font-weight: 500;
 }
 
+.checkpoint-tag {
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.checkpoint.done .checkpoint-tag {
+    color: var(--text-secondary);
+}
+
 .checkpoint.upcoming .checkpoint-circle {
     background: transparent;
     border: 1.5px solid var(--border);
@@ -601,4 +624,29 @@ h1 {
     font-size: 12px;
     font-weight: 500;
     color: var(--text-primary);
+}
+
+.plain-block {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    text-align: center;
+}
+
+.eyebrow-strong {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+#nudge-btn {
+    background: var(--card);
+    border: none;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+#nudge-btn i {
+    color: var(--primary);
 }

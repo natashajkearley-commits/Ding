@@ -700,7 +700,7 @@ function updateCheckpoints(data) {
     if (activeStage === 3) {
         checkpoint1.classList.add('done');
         checkpoint2.classList.add('done');
-        checkpoint3.classList.add('active');
+        checkpoint3.classList.add('done');
 
         if (data.attending === false) {
             setTag('Tonight', 'Sorting themselves out tonight');
