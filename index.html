@@ -73,7 +73,11 @@
         <h1>Will you be joining me for dinner?</h1>
 
         <div class="time-note">
-            <span id="invite-time-text">Mum's planning for tonight</span>
+           <span id="invite-time-text">Mum's free for dinner tonight</span>
+        </div>
+        <div class="field-group" id="time-picker-group" style="display: none;">
+           <p class="field-label">Pick a time that works</p>
+           <input type="time" id="picked-time-input" class="time-input">
         </div>
 
         <div class="button-row">
@@ -142,8 +146,12 @@
         </div>
 
         <div class="field-group">
-            <p class="field-label">Dinner time (optional)</p>
-            <input type="time" id="time-input" class="time-input">
+            <p class="field-label">Available from (optional)</p>
+            <input type="time" id="time-window-start" class="time-input">
+        </div>
+        <div class="field-group">
+            <p class="field-label">Available until (optional)</p>
+            <input type="time" id="time-window-end" class="time-input">
         </div>
 
         <button class="btn-primary full-width" id="send-invite-btn">Send invite</button>

@@ -112,8 +112,8 @@ const yesButton = document.getElementById('invite-yes-btn');
 const noButton = document.getElementById('invite-no-btn');
 const statusLine = document.querySelector('.status-line');
 const sendInviteBtn = document.getElementById('send-invite-btn');
-const timeInput = document.getElementById('time-input');
-
+const timeWindowStart = document.getElementById('time-window-start');
+const timeWindowEnd = document.getElementById('time-window-end');
 
 
 let mealList = [];
@@ -431,22 +431,31 @@ if (backToHome) {
 }
 
 async function respondToInvite(response) {
+    const pickedTimeInput = document.getElementById('picked-time-input');
+    const pickedTime = response ? (pickedTimeInput?.value || null) : null;
+
     await setDoc(responseRef, {
         attending: response,
+        pickedTime: pickedTime,
         respondedAt: new Date().toISOString()
     }, { merge: true });
-    await logEvent(response ? "Emily confirmed she's coming" : "Emily said she's sorting herself out");
-    
+
+    const timeMsg = pickedTime ? ` at ${formatTime12Hour(pickedTime)}` : "";
+    await logEvent(response ? `Emily confirmed she's coming${timeMsg}` : "Emily said she's sorting herself out");
 }
 
 async function sendInvite() {
-    const time = timeInput.value || null;
+    const windowStart = timeWindowStart.value || null;
+    const windowEnd = timeWindowEnd.value || null;
 
     await setDoc(responseRef, {
         inviteSent: true,
         inviteSentAt: new Date().toISOString(),
         date: getTodayDateString(),
-        time: time,
+        timeWindowStart: windowStart,
+        timeWindowEnd: windowEnd,
+        time: null,
+        pickedTime: null,
         nudgeSent: false,
         attending: null,
         respondedAt: null,
@@ -464,7 +473,10 @@ async function sendInvite() {
         events: []
     }, { merge: true });
 
-    await logEvent("Invite sent to Emily" + (time ? ` — dinner planned for ${formatTime12Hour(time)}` : ''));
+    const windowMsg = (windowStart && windowEnd)
+      ? ` — free between ${formatTime12Hour(windowStart)} and ${formatTime12Hour(windowEnd)}`
+      : '';
+    await logEvent("Invite sent to Emily" + windowMsg);
 
     showScreen('screen-home');
 }
@@ -544,10 +556,15 @@ onSnapshot(responseRef, (snapshot) => {
         }
 
         const timeText = document.getElementById('invite-time-text');
+        const timePickerGroup = document.getElementById('time-picker-group');
         if (timeText) {
-            timeText.textContent = data.time
-                ? `Mum's planning for ${formatTime12Hour(data.time)}`
-                : "Mum's planning for tonight";
+            if (data.timeWindowStart && data.timeWindowEnd) {
+                timeText.textContent = `Mum's free between ${formatTime12Hour(data.timeWindowStart)} and ${formatTime12Hour(data.timeWindowEnd)}`;
+                if (timePickerGroup) timePickerGroup.style.display = 'block';
+            } else {
+                timeText.textContent = "Mum's free for dinner tonight";
+                if (timePickerGroup) timePickerGroup.style.display = 'block';
+            }
         }
 
        
